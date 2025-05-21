@@ -10,9 +10,12 @@ function Practice01() {
         <div className="App">
             <div className="b1">
                 <button onClick={() => {
-                    setCnt2(cnt2 + 2);
+                    setCnt2(cnt2+2);
                     console.log(cnt2)
                 }}>짝수출력</button> <span>{cnt2}</span>
+                {
+                    //cnt2 != 0 && <span>{cnt2}</span> 0일 때는 안 보였다가 나타남
+                }
             </div>
         </div>
     );
