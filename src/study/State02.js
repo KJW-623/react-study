@@ -17,7 +17,7 @@ function State02() {
 
     let msgArr = ["안녕", "밥먹었니", "졸리니", "집에가고싶니"];
 
-    let [colorArr, setColorArr] = sueState(['빨강', '파랑', '노랑', '초록']);
+    let [colorArr, setColorArr] = useState(['빨강', '파랑', '노랑', '초록']);
     let [item, setItem] = useState({name:"핸드크림", price:9000});
 
     return (
