@@ -1,5 +1,6 @@
 import './NewsBlog.css';
 import { useState } from "react";
+import Modal from './Modal';
 
 function NewsBlog() {
 
@@ -17,6 +18,10 @@ function NewsBlog() {
 
     let [likeCountArr, setLikeCountArr] = useState([0, 0, 0]);
 
+    let [showModal, setShowModal] = useState(true);
+
+    let [selectedTitle, setSelectrdTitle] = useState('');
+
     return (
 
         <div>
@@ -26,7 +31,10 @@ function NewsBlog() {
             </div>
 
             <div className='post-list'>
-                <h4>{news[0]} <span onClick={() => {
+                <h4 onClick={() => {
+                    setShowModal(!showModal);
+                    setSelectrdTitle(news[0]);
+                }}>{news[0]} <span onClick={() => {
                     let temp = [...likeCountArr];
                     temp[0] += 1;
                     setLikeCountArr(temp);
@@ -44,7 +52,12 @@ function NewsBlog() {
             </div>
 
             <div className='post-list'>
-                <h4>{news[1]} <span onClick={() => {
+                <h4 onClick={() => {
+                    if (showModal)
+                        setShowModal(false)
+                    else
+                        setSelectrdTitle(news[1])
+                }}>{news[1]} <span onClick={() => {
                     //setLikeCount(likeCount[1] + 1);
                     let temp = [...likeCountArr];
                     temp[1] += 1;
@@ -54,7 +67,12 @@ function NewsBlog() {
             </div>
 
             <div className='post-list'>
-                <h4>{news[2]} <span onClick={() => {
+                <h4 onClick={() => {
+                    setShowModal(!showModal);
+                    setSelectrdTitle(news[2])
+                }}>{news[2]} <span onClick={(event) => {
+                    event.stopPropagation(); //전파를 막겠다
+                    //속해있는 부모 요소의 이벤트 처리까지 전파되는 걸 막겠다
                     //setLikeCount2(likeCount2[2] + 1);
                     let temp = [...likeCountArr];
                     temp[2] += 1;
@@ -62,6 +80,12 @@ function NewsBlog() {
                 }}>❤</span>{likeCountArr[2]}</h4>
                 <p>내용 무</p>
             </div>
+
+
+            {
+                //showModal == true ? <Modal /> : null
+                showModal && <Modal title ={selectedTitle}/>
+            }
 
         </div>
     );
