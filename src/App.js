@@ -11,7 +11,8 @@ import Props02 from './study/Props02';
 import Practice03 from './practice/practice03/Practice03';
 import NewsBlog from './NewsBlog/NewsBlog';
 import Practice04 from './practice/Practice04/Practice04';
-import FoodMarket from './foodmarket/pages/FoodMarket';
+import Practice05 from './practice/practice05/Practice05';
+//import FoodMarket from './foodmarket/pages/FoodMarket';
 
 
 
@@ -30,7 +31,8 @@ function App() {
   //return <Practice04/>;
   //return <NewsBlog/>;
   //return <Practice04/>;
-  return <FoodMarket/>;
+  //return <FoodMarket/>;
+  return <Practice05/>;
 
   /*
   return (
