@@ -5,13 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Temp from './Temp.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter } from 'react-router';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+
+    <BrowserRouter>
       <App />
-      {/*<Temp/>*/}
+    </BrowserRouter>
+
+    {/*<Temp/>*/}
   </React.StrictMode>
 );
 
