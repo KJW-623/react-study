@@ -11,7 +11,9 @@ function Detail({ foods }) {
 
     let [orderCount, setOrderCount] = useState(0);
 
-    let [showModal, setShowModal] = useState(true);
+    let [showModal, setShowModal] = useState(false);
+
+    let [viewClass, setViewClass] = useState('');
 
     //  foods 전체 정보 보유
 
@@ -57,13 +59,21 @@ function Detail({ foods }) {
         */
 
     //modal 창 가리기
-    useEffect(()=>{
+    useEffect(() => {
 
-        setTimeout(()=>{
+        setTimeout(() => {
             setShowModal(false);
         }, 2000)
     }, [])
 
+    //container opacity 트랜지션 효과
+    useEffect(()=>{
+
+        setTimeout(()=>{
+            setViewClass('end');
+        }, 300);
+
+    }, [])
 
 
     if (food == undefined) { //잘못된 id값이 들어옴. 해당 id 상품 없음
@@ -73,16 +83,88 @@ function Detail({ foods }) {
     }
 
 
+
+    //style
+    const tempStyle = {
+        color: "orange",
+        fontSize: '20px'
+    };
+
+    const blueTextStyle = {
+        color: "blue"
+    }
+
+    const styles = {
+        redStyle: {
+            color: 'red'
+        },
+        blueStyle: {
+            color: "blue"
+        },
+        fontBigBold: {
+            fontSize: "2rem",
+            fontWeight: "bold"
+        }
+    }
+
+    /*
+        조건에 따라서 스타일 적용
+
+        가격표시 {food.price}
+            1만원 이상 >> 빨간색
+            1만원 이하 >> 파란색
+
+            food.price >= 10000
+    */
+
+    //1) 객체
+    const priceTextStyle = {
+        color: food.price >= 10000 ? 'red' : 'blue'
+    }
+
+    //2) 함수
+    const priceTextStyleFunc = (price) => {
+
+        if (price >= 10000)
+            return { color: "red" }
+        else
+            return { color: "blue" }
+    }
+    //<p style={priceTextStyleFunc(food.price)}>{food.price}</p>
+
+    /*
+    3) CSS 클래스명 연계 활용
+
+    //단일 클래스 적용
+    <p className={food.price >= 10000 ? 'price-red' : 'price-blue'}>{food.price}</p>
+
+    //다중 클래스 적용
+    <p className={food.price >= 10000 ? 'price-red text-strong' : 'price-blue text-strong'}>{food.price}</p>
+
+        + 연산
+        <p className={'text-strong ' + food.price >= 10000 ? 'price-red' : 'price-blue'}>{food.price}</p>
+
+        join 함수
+        <p className={'text-strong ' + food.price >= 10000 ? 'price-red' : 'price-blue'}.join(" ")>{food.price}</p>
+
+        변수
+        const priceClassName = 'text-strong price-red';
+
+        백틱문자 활용
+        <p className={`text-strong ${food.price >= 10000 ? 'price-red' : 'price-blue'}`}>{food.price}</p>
+    */
+
     return (
-        <Container>
+                                //"start "
+        <Container className={'start' + viewClass}>
             <Row>
                 <Col md={6}>
                     <img src={process.env.PUBLIC_URL + food.imgPath} width="100%" />
                 </Col>
                 <Col md={6}>
                     <h4 style={{ paddingTop: '30px' }}>{food.title}</h4>
-                    <p>{food.content}</p>
-                    <p>{food.price}</p>
+                    <p style={tempStyle}>{food.content}</p>
+                    <p className={food.price >= 10000 ? 'price-red' : 'price-blue'}>{food.price}</p>
                     <p>
                         <Button variant="dark" onClick={() => {
                             if (orderCount > 0)
@@ -99,13 +181,13 @@ function Detail({ foods }) {
             </Row>
 
 
-            <Modal show={showModal} onHide={()=>{setShowModal(false)}}>
+            <Modal show={showModal} onHide={() => { setShowModal(false) }}>
                 <Modal.Header closeButton>
                     <Modal.Title>환영합니다.</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>어서오세요~ 음식 구경하세요~</Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={()=>{setShowModal(false)}}>
+                    <Button variant="primary" onClick={() => { setShowModal(false) }}>
                         확인
                     </Button>
                 </Modal.Footer>
