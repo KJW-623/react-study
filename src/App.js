@@ -33,10 +33,10 @@ function App() {
   //return <Practice04/>;
   //return <NewsBlog/>;
   //return <Practice04/>;
-  //return <FoodMarket/>;
+  return <FoodMarket/>;
   //return <Practice05/>;
   //return <Practice06/>;
-  return <Practice07/>;
+  //return <Practice07/>;
 
   /*
   return (
