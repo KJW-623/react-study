@@ -15,6 +15,7 @@ function Detail({ foods }) {
 
     let [viewClass, setViewClass] = useState('');
 
+
     //  foods 전체 정보 보유
 
     //  id  : 현재 페이지에서 표시해야하는 food의 id가 확인됨
@@ -67,9 +68,9 @@ function Detail({ foods }) {
     }, [])
 
     //container opacity 트랜지션 효과
-    useEffect(()=>{
+    useEffect(() => {
 
-        setTimeout(()=>{
+        setTimeout(() => {
             setViewClass('end');
         }, 300);
 
@@ -155,7 +156,7 @@ function Detail({ foods }) {
     */
 
     return (
-                                //"start "
+        //"start "
         <Container className={'start' + viewClass}>
             <Row>
                 <Col md={6}>
@@ -164,7 +165,8 @@ function Detail({ foods }) {
                 <Col md={6}>
                     <h4 style={{ paddingTop: '30px' }}>{food.title}</h4>
                     <p style={tempStyle}>{food.content}</p>
-                    <p className={food.price >= 10000 ? 'price-red' : 'price-blue'}>{food.price}</p>
+                    <p className={food.price >= 10000 ? 'price-red' : 'price-blue'}>가격: {food.price}원</p>
+                    <p>잔여수량: {food.stockCount}개</p>
                     <p>
                         <Button variant="dark" onClick={() => {
                             if (orderCount > 0)
@@ -172,11 +174,13 @@ function Detail({ foods }) {
                         }}>-</Button>
                         <span>{orderCount} </span>
                         <Button variant="dark" onClick={() => {
-                            setOrderCount(orderCount + 1);
+                            if (orderCount < food.stockCount)
+                                setOrderCount(orderCount + 1);
                         }}>+</Button>
                     </p>
 
-                    <Button variant="primary">주문하기</Button>
+                    {food.stockCount == 0 ? (
+                    <Button variant="secondary" disabled>품절</Button>) : (<Button variant="primary">주문하기</Button>)}
                 </Col>
             </Row>
 
