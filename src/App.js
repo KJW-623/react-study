@@ -15,6 +15,7 @@ import Practice05 from './practice/practice05/Practice05';
 import Practice06 from './practice/practice06/Practice06';
 import Practice07 from './practice/practice07/Practice07';
 import FoodMarket from './foodmarket/pages/FoodMarket';
+import AppRS from './react_spring/AppRS';
 
 
 
@@ -33,10 +34,11 @@ function App() {
   //return <Practice04/>;
   //return <NewsBlog/>;
   //return <Practice04/>;
-  return <FoodMarket/>;
+  //return <FoodMarket/>;
   //return <Practice05/>;
   //return <Practice06/>;
   //return <Practice07/>;
+  return <AppRS/>;
 
   /*
   return (
